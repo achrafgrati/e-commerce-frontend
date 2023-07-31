@@ -1,0 +1,13 @@
+redux
+features -> slices
+services
+
+return (res.data)= payload
+
+action : nom du slice / nom de la methode
+
+les 3 etats de communication avec le backend:
+Pending
+fulfilled
+rejected 
+
