@@ -13,14 +13,102 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { logout, reset } from "../features/authSlice";
+
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { useDispatch } from "react-redux"
+//import { urlimage } from "../Axios/Api"
+
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
+import LogoutIcon from '@mui/icons-material/Logout';
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
+
+
+
+
 const NavScroll = () => {
 
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClickListItem = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
-const {cartTotalQuantity} = useSelector((state) => state.storecart);
+  const { cartTotalQuantity } = useSelector((state) => state.storecart);
+
+  const LogOutFunction = () => {
+    dispatch(reset());
+    dispatch(logout())
+      .then(() => {
+        navigate("/login");
+      });
+  }
   return (
     <div>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
+
+          <Stack direction="row" spacing={2}>
+            <ListItem
+               
+              id="lock-button"
+              aria-haspopup="listbox"
+              aria-controls="lock-menu"
+              aria-label=<Avatar alt={user?.email} src={user?.avatar} />
+              aria-expanded={open ? 'true' : undefined}
+              onClick={handleClickListItem}
+            >
+              <ListItemText
+                primary=<Avatar alt={user?.email} src={user?.avatar} />
+                secondary={user.email}
+              />
+            </ListItem>
+            <Menu
+              id="lock-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'lock-button',
+                role: 'listbox',
+              }}
+            >
+              <MenuItem
+                onClick={() => { }}
+              >
+                <AccountCircleIcon />
+                Profile
+              </MenuItem>
+              <MenuItem
+                onClick={() => { }}
+              >
+                <SettingsApplicationsIcon />
+                Settings
+              </MenuItem>
+              <MenuItem
+                onClick={() => LogOutFunction()}
+              >
+                <LogoutIcon />
+                Logout
+              </MenuItem>
+            </Menu>
+          </Stack>
+
+
           <IconButton size="large"
             edge="end"
             aria-label="account of current user"

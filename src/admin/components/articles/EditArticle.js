@@ -254,7 +254,7 @@ const EditArticle = ({ art, show, handleClose }) => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button type="submit">Enregistrer</Button>
+                        <Button type="submit" onClick={handleSubmit} >Enregistrer</Button>
                         <Button type="button" className="btn btn-warning" onClick={handleClose} >Annuler</Button>
                     </Modal.Footer>
                 </Form>
