@@ -15,6 +15,7 @@ import Register from './admin/components/Register';
 import ProtectedRoutes from './admin/ProtectedRoute';
 import { useSelector } from 'react-redux';
 import Nopage from './admin/components/Nopage';
+import Banner from './components/Banner';
 
 function App() {
   const {isLoggedIn} = useSelector((state) => state.auth);
@@ -31,8 +32,9 @@ function App() {
 
         </Route>
 
-          <Route path='/' element={<Listarticles />} ></Route>
+          
           <Route path='/articles' element={<Listarticles />} ></Route>
+          
           <Route path='/cart' element={<Cart />} />
           <Route path='/pay/:total' element={<StripePayment />} />
           <Route path="/checkout" element={<CheckoutSuccess />} />
@@ -41,6 +43,8 @@ function App() {
           <Route path='/logout' element={<Logout />} />
           <Route path='/register' element={<Register />} />
           <Route path='/menu' element={isLoggedIn ?< NavScroll /> : <Login/>} />
+
+          <Route path='/' element={<Banner/>}/>
           <Route path='*' element={<Nopage/>} />
         </Routes>
       </Router>

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import articlesReducer from "../features/articleSlice"
 import cartSliceReducer from "../features/cartSlice"
 import scaategoriesReducer from "../features/scategorieSlice"
+import categoriesReducer from "../features/categorieSlice"
 import authReducer from "../features/authSlice"
 
 import { persistReducer } from 'redux-persist'
@@ -20,6 +21,7 @@ const store = configureStore({
     reducer: {
         storearticles: articlesReducer,
         storescategories: scaategoriesReducer,
+        storecategories: categoriesReducer,
         storecart: cartSliceReducer,
         auth: persistedReducer
     },
